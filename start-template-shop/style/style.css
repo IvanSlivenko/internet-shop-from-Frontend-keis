@@ -28,6 +28,10 @@
     border-radius: 4px;
     transition: 0.2s;
     position: relative;
+
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid grey;
 }
 
 .card:hover {
@@ -86,7 +90,7 @@
 }
 
 .card__price::after {
-    content: "₽";
+    content: "грн.";
     margin-left: 4px;
     position: relative;
 }
@@ -94,32 +98,36 @@
 .card__price--discount {
     font-weight: 700;
     font-size: 19px;
-    color: #414141;
+    /* color: #414141; */
+    color: white;
     display: flex;
     flex-wrap: wrap-reverse;
 }
 
 .card__price--discount::before {
-    content: "Со скидкой";
+    content: "Зі знижкою";
     font-weight: 400;
     font-size: 13px;
-    color: #bfbfbf;
+    /* color: #bfbfbf; */
+    color: white;
 }
 
 .card__price--common {
     font-weight: 400;
     font-size: 17px;
-    color: #606060;
+    /* color: #606060; */
+    color: wheat;
     display: flex;
     flex-wrap: wrap-reverse;
     justify-content: flex-end;
 }
 
 .card__price--common::before {
-    content: "Обычная";
+    content: "Звичайна";
     font-weight: 400;
     font-size: 13px;
-    color: #bfbfbf;
+    /* color: #bfbfbf; */
+    color: wheat;
 }
 
 .card__title {
@@ -128,7 +136,8 @@
     font-weight: 400;
     font-size: 17px;
     line-height: 150%;
-    color: #414141;
+    /* color: #414141; */
+    color: wheat;
 }
 
 .card__title:hover {
@@ -140,10 +149,12 @@
     width: 100%;
     font-weight: 400;
     font-size: 17px;
-    color: #70c05b;
+    background-color: #606060;
+    /* color: #70c05b; */
+    color: white;
     padding: 10px;
     text-align: center;
-    border: 1px solid #70c05b;
+    /* border: 1px solid #70c05b; */
     border-radius: 4px;
     cursor: pointer; 
     transition: 0.2s;

@@ -17,6 +17,10 @@ body {
     box-sizing: border-box;
 }
 
+footer {
+    color: wheat;
+}
+
 .none {
     display: none;
 }
@@ -47,6 +51,7 @@ body {
 h1 {
     padding: 20px;
     text-align: center;
+    color: wheat;
 }
 
 .basket{

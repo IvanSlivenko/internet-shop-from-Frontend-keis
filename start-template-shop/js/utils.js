@@ -39,3 +39,7 @@ export function checkingRelevanceValueBasket(productsData) {
 
     setBasketLocalStorage(basket);
 }
+
+export function formatPrice(price) {
+  return new Intl.NumberFormat('uk-UA').format(price);
+}

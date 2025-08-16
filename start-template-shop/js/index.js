@@ -4,7 +4,8 @@ import {
     showErrorMessage,
     setBasketLocalStorage,
     getBasketLocalStorage,
-    checkingRelevanceValueBasket
+    checkingRelevanceValueBasket,
+    formatPrice
 } from './utils.js';
 
 import { 
@@ -20,15 +21,84 @@ let countClickBtnShowCards = 1;
 let productsData = [];
 
 
+getProducts();
+
+btnShowCards.addEventListener('click', scliceArrCards);
+cards.addEventListener('click', handleCartClick);
+
+async  function getProducts(){
+    try {
+        if(!productsData.length){
+            const res = await fetch('./data/products.json');
+            if(!res.ok){
+                throw new Error(res.statusText);
+            }
+            productsData = await res.json();
+        
+        }
+
+        console.log(productsData);
+
+        if((productsData.length > COUNT_SHOW_CARDS_CLICK) && 
+            btnShowCards.classList.contains('none')){
+                btnShowCards.classList.remove('none');
+            }
+
+            renderStartPage(productsData);
+
+    } catch (err) {
+        showErrorMessage(ERROR_SERVER);
+        console.log(err.message);
+    }
+} 
+
+function renderStartPage(data){
+    if(!data || !data.length){
+        showErrorMessage(NO_PRODUCTS_IN_THIS_CATEGORY);
+        return
+    };
+
+    const arrCards = data.slice(0,COUNT_SHOW_CARDS_CLICK);
+    createCards(arrCards);
+}
+
+function scliceArrCards(){
+    if(shownCards >= productsData.length) return;
+
+    countClickBtnShowCards++;
+    const countShowCards = COUNT_SHOW_CARDS_CLICK * countClickBtnShowCards;
+
+    const arrCards = productsData.slice(shownCards, countShowCards);
+    createCards(arrCards);
+    shownCards = cards.children.length;
+
+    if(shownCards >= productsData.length){
+        btnShowCards.classList.add('none');
+    }
+}
+
+function handleCartClick(event){
+    const targetButton = event.target.closest('.card__add');
+    if(!targetButton) return;
+
+    const card = targetButton.closest('.card');
+    const id = card.dataset.productId;
+    const bascket =  getBasketLocalStorage();
+
+    if(bascket.inclides(id))return;
+    bascket.push(id);
+    setBasketLocalStorage(bascket);
+    chekingActiveButtons(bascket);
+
+}
+
+function chekingActiveButtons(){
+
+}
 
 
 
-
-
-
-
-
-// Рендер карточки
+// Рендер картки
 function createCards(data) {
     data.forEach(card => {
         const { id, img, title, price, discount } = card;
@@ -47,11 +117,11 @@ function createCards(data) {
                     </div>
                     <div class="card__bottom">
                         <div class="card__prices">
-                            <div class="card__price card__price--discount">${priceDiscount}</div>
-                            <div class="card__price card__price--common">${price}</div>
+                            <div class="card__price card__price--discount">${formatPrice(priceDiscount)}</div>
+                            <div class="card__price card__price--common">${formatPrice(price)}</div>
                         </div>
                         <a href="/card.html?id=${id}" class="card__title">${title}</a>
-                        <button class="card__add">В корзину</button>
+                        <button class="card__add">До кошикa</button>
                     </div>
                 </div>
             `
