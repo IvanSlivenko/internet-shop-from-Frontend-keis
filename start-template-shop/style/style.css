@@ -199,8 +199,20 @@
     border-radius: 50%;
     /* background-color: #ff3b30;
     color: white; */
+    background-color: #ff6633;
+    color: white;
+    padding: 3px;
+    text-align: center;
+    min-width: 25px;
+}
+
+.basket__count__zero{
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    border-radius: 50%;
     background-color: white;
-    color: grey;
+    color: gray;
     padding: 3px;
     text-align: center;
     min-width: 25px;
